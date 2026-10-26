@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bergamo: i dati più interessanti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#00284b;--orange:#eb5c3c;--white:#fff;--mid:#7f93a6;--track:#e9eef3;--line:#d5dde5}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--white);color:var(--navy);font:400 16px/1.35 "Roboto Condensed","Arial Narrow",Arial,sans-serif}
+.wrap{padding:0}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:520px}
+caption{text-align:left;font-weight:700;font-size:20px;padding:0 0 8px;border-bottom:4px solid var(--orange);margin-bottom:0}
+th{font-weight:700;font-size:15px;color:var(--white);background:var(--navy);text-align:left;padding:9px 10px}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th.n,td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.n{font-weight:700}
+tr.grp th{background:var(--track);color:var(--navy);font-size:15px;border-bottom:1px solid var(--line);border-left:4px solid var(--orange);padding:6px 10px}
+.pos{display:flex;align-items:center;gap:10px;min-width:170px}
+.bar{flex:1;height:9px;background:var(--track);overflow:hidden}
+.bar i{display:block;height:100%}
+.rk{width:34px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.g i{background:var(--navy)}.m i{background:var(--mid)}.b i{background:var(--orange)}
+.leg{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin-top:10px}
+.leg span:before{content:"";display:inline-block;width:10px;height:10px;margin-right:6px}
+.l1:before{background:var(--navy)}.l2:before{background:var(--mid)}.l3:before{background:var(--orange)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="scroll">
+<table id="t">
+<caption>Bergamo nella classifica delle 106 città</caption>
+<thead><tr><th>Indicatore</th><th>Posizione su 106</th><th class="n">Valore</th></tr></thead>
+<tbody></tbody>
+</table>
+</div>
+<div class="leg"><span class="l1">Primo terzo (1ª-35ª)</span><span class="l2">Centro (36ª-70ª)</span><span class="l3">Ultimo terzo (71ª-106ª)</span></div>
+</div>
+<script>
+var D=[
+["Aria",[["Biossido di azoto (NO₂)",85,"24,0"],["Ozono",91,"84,0"],["PM10",71,"23,0"],["PM2,5",67,"15,0"]]],
+["Acqua",[["Consumi idrici",87,"174,2"],["Dispersione della rete idrica",32,"25,2%"]]],
+["Rifiuti",[["Rifiuti prodotti",45,"499,5"],["Raccolta differenziata",20,"79,2%"]]],
+["Mobilità",[["Passeggeri del trasporto pubblico",23,"119,9"],["Offerta di trasporto pubblico",33,"27,1"],["Piste ciclabili",23,"18,2"],["Tasso di motorizzazione",33,"66,8"],["Isole pedonali",56,"24,6"]]],
+["Verde e suolo",[["Alberi",18,"32,1"],["Verde totale",34,"24,2"],["Uso efficiente del suolo",20,"8,0"],["Trend del consumo di suolo",31,"3,9"],["Solare pubblico",22,"10,7"]]]
+];
+var tb=document.querySelector("#t tbody"),h="";
+D.forEach(function(g){
+h+='<tr class="grp"><th colspan="3">'+g[0]+'</th></tr>';
+g[1].forEach(function(r){
+var c=r[1]<=35?"g":r[1]<=70?"m":"b";
+h+='<tr><td>'+r[0]+'</td><td><div class="pos '+c+'"><span class="rk">'+r[1]+'ª</span><span class="bar"><i style="width:'+(r[1]/106*100).toFixed(1)+'%"></i></span></div></td><td class="n">'+r[2]+'</td></tr>';
+});});
+tb.innerHTML=h;
+</script>
+</body>
+</html>
